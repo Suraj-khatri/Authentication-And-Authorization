@@ -464,3 +464,4 @@ E:\UserManagementRefactored2\User.Management.API\User.Management.API\obj\Debug\n
 E:\UserManagementRefactored2\User.Management.API\User.Management.API\obj\Debug\net8.0\User.Man.B7CD4937.Up2Date
 E:\UserManagementRefactored2\User.Management.API\User.Management.API\obj\Debug\net8.0\User.Management.API.genruntimeconfig.cache
 E:\UserManagementRefactored2\User.Management.API\User.Management.API\obj\Debug\net8.0\ref\User.Management.API.dll
+E:\UserManagementRefactored2\User.Management.API\User.Management.API\obj\Debug\net8.0\User.Management.API.sourcelink.json

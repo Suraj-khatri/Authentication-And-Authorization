@@ -26,11 +26,49 @@ namespace User.Management.Service.Services
 
         private MimeMessage CreateEmailMessage(Message message)
         {
+            //var emailMessage = new MimeMessage();
+            //emailMessage.From.Add(new MailboxAddress("email", _emailConfig.From));
+            //emailMessage.To.AddRange(message.To);
+            //emailMessage.Subject = message.Subject;
+            //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
+
+
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("email", _emailConfig.From));
+            emailMessage.From.Add(new MailboxAddress("Support Team", _emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
+
+            // Simple HTML content
+            string htmlContent = $@"
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                    <style>
+                        body {{ font-family: Arial, sans-serif; color: #333; }}
+                        .container {{ max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; }}
+                        .header {{ font-size: 20px; color: #4A90E2; font-weight: bold; }}
+                        .content {{ margin-top: 20px; font-size: 16px; }}
+                        .footer {{ margin-top: 30px; font-size: 12px; color: #888; text-align: center; }}
+                    </style>
+                </head>
+                <body>
+                    <div class='container'>
+                        <div class='header'>{message.Subject}</div>
+                        <div class='content'>
+                            <p>Hello,</p>
+                            <p>{message.Content}</p>
+                            <p>Thank you,<br>Your Support Team</p>
+                        </div>
+                        <div class='footer'>
+                            &copy; {DateTime.Now.Year} Your Company
+                        </div>
+                    </div>
+                </body>
+                </html>";
+
+            // Set the HTML body
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlContent };
+
 
             return emailMessage;
         }

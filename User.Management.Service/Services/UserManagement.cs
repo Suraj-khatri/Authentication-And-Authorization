@@ -57,8 +57,7 @@ namespace User.Management.Service.Services
             {
                 IsSuccess = true,
                 StatusCode = 200,
-                Message = "Roles has been assigned"
-            ,
+                Message = "Roles has been assigned",
                 Response = assignedRole
             };
         }
@@ -75,11 +74,15 @@ namespace User.Management.Service.Services
                 Email = registerUser.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = registerUser.Username,
-                TwoFactorEnabled = true
+                TwoFactorEnabled = true,
+                RefreshToken =""
+               
             };
             var result = await _userManager.CreateAsync(user, registerUser.Password);
+            
             if (result.Succeeded)
             {
+
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 return new ApiResponse<CreateUserResponse> { Response = new CreateUserResponse() { User = user, Token = token }, IsSuccess = true, StatusCode = 201, Message = "User Created" };
 
